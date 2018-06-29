@@ -13132,11 +13132,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuário\\source\\repos\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\Clientes.csproj",
+      "projectUniqueName": "C:\\Users\\Usuário\\Source\\Repos\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\Clientes.csproj",
       "projectName": "Clientes",
-      "projectPath": "C:\\Users\\Usuário\\source\\repos\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\Clientes.csproj",
+      "projectPath": "C:\\Users\\Usuário\\Source\\Repos\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\Clientes.csproj",
       "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuário\\source\\repos\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\obj\\",
+      "outputPath": "C:\\Users\\Usuário\\Source\\Repos\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\ClientesASP.NET-CORE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

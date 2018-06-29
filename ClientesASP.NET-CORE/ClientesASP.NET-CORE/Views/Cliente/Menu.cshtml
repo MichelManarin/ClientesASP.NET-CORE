@@ -1,4 +1,6 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Home";
+}
 <div class="body-content">
     <div class="jumbotron">
         <h1 class="text-center">Cadastro de pessoas</h1>
@@ -32,9 +34,9 @@
     <div class="row">
         <div class="col-lg-12">
             <span class="input-group-btn">
-                <a href="/cliente/cadastrar" class="btn btn-primary" type="button"> Nova pessoa</a>
+                @Html.ActionLink("Nova pessoa", "cadastrar", "cliente",null, new { @class = "btn btn-primary" })
             </span>
         </div>
-        
+
     </div> <!-- fim row -->
 </div>
