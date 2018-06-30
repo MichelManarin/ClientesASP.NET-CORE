@@ -14,6 +14,12 @@ namespace Clientes
         {
             this._contexto = contexto;
         }
+        
+
+        public List<Pessoa> GetPessoas()
+        {
+            return this._contexto.Pessoas.ToList();
+        }
 
         public void InicializaDB()
         {
@@ -31,6 +37,12 @@ namespace Clientes
                 pessoas.ForEach( pessoa => this._contexto.Pessoas.Add(pessoa));
                 this._contexto.SaveChanges();
             }            
+        }
+
+        void IDataService.SetPessoas(Pessoa novapessoa)
+        {
+            this._contexto.Pessoas.Add(novapessoa);
+            this._contexto.SaveChanges();
         }
     }
 }

@@ -9,14 +9,15 @@ namespace Clientes.Controllers
 {
     public class ClienteController : Controller
     {
-
+        private readonly IDataService _dataService;
+        public ClienteController(IDataService dataService)
+        {
+            this._dataService = dataService;
+        }
 
         public IActionResult Menu()
         {
-            var pessoas = new List<Pessoa>
-            {
-                new Pessoa("Michel", "096.125156165", DateTime.Now, DateTime.Now)
-            };
+            List<Pessoa> pessoas = _dataService.GetPessoas();
             return View(pessoas);
         }
 
