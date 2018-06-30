@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,14 +8,22 @@ namespace Clientes.Models
 {
     public class Telefone
     {
+        [Required]
         public int Id { get; private set; }
-        public int IdPessoa { get; private set; }
+        [Required]
         public string Numero { get; private set; }
+        [Required]
+        public Pessoa Pessoa { get; private set; }
 
-        public Telefone(int id, int idpessoa, string numero)
+        public Telefone()
+        {
+
+        }
+
+        public Telefone(int id, Pessoa pessoa, string numero)
         {
             this.Id = id;
-            this.IdPessoa = idpessoa;
+            this.Pessoa = pessoa;
             this.Numero = numero;
         }
     }
