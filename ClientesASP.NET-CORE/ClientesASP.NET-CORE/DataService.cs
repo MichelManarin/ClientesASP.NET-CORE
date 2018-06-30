@@ -14,7 +14,14 @@ namespace Clientes
         {
             this._contexto = contexto;
         }
-        
+
+        public Pessoa GetPessoa(int id)
+        {
+            if (id < 1)
+                throw new ArgumentException("É necessário informar o id da pessoa a ser buscada");
+    
+            return this._contexto.Pessoas.Find(id);
+        }
 
         public List<Pessoa> GetPessoas(string filtroNome, DateTime filtroNasc, DateTime filtroDataCad)
         {

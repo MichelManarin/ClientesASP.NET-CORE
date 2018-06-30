@@ -8,6 +8,7 @@ namespace Clientes
     {
         void InicializaDB();
         List<Pessoa> GetPessoas(string filtroNome, DateTime filtroNasc, DateTime filtroDataCad);
+        Pessoa GetPessoa(Int32 id);
         void SetPessoas(Pessoa novapessoa);
     }
 }

@@ -21,9 +21,12 @@ namespace Clientes.Controllers
             return View(pessoas);
         }
         
-        public IActionResult Cadastrar()
+        public IActionResult Cadastrar(Int32 id)
         {
-            return View();
+            if (id > 0)
+                return View(_dataService.GetPessoa(id));
+            else
+                return View();
         }
 
         public IActionResult Relatorio()
@@ -31,9 +34,10 @@ namespace Clientes.Controllers
             return View();
         }
 
-        public IActionResult CadastrarNovaPessoa()
+        protected void EfetuarCadastro(string nome, string cpf, DateTime datanascimento)
         {
-            return View();
+            _dataService.SetPessoas(new Pessoa(nome, cpf, DateTime.Now, datanascimento));
+                    
         }
     }
 }

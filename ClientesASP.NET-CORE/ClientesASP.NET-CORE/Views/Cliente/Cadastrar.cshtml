@@ -1,36 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Cadastro de clientes";
 }
+
+
+<script src="~/lib/jquery/dist/jquery.mask.min.js"></script>
 <div class="body-content">
     <div class="jumbotron">
         <h1 class="text-center">Cadastro de pessoas</h1>
     </div>
     <div class="row">
-        <div class="col-lg-8 col-md-6 col-xs-12">
-            <form id="formulario" onsubmit="pessoaController.adiciona(event)" class="form-horizontal form-material">
+        <div class="col-lg-6 col-md-6 col-xs-12">
+            <form>
                 <div class="form-group">
                     <label class="col-md-12">Nome</label>
                     <div class="col-md-12">
-                        <input name="nome" required="" id="camponome" type="text" placeholder="Nome da pessoa" class="form-control form-control-line">
+                        <input required name="camponome" id="camponome" type="text" placeholder="Nome da pessoa" class="form-control">
                     </div>
-                </div>
-                <div class="form-group">
                     <label for="datanascimento" class="col-md-12">Data de nascimento</label>
                     <div class="col-md-12">
-                        <input name="datanascimento" required="" id="datanascimento" type="date" placeholder="Data de nascimento da pessoa" class="form-control form-control-line">
+                        <input name="camponasc" id="camponasc" type="date" placeholder="Data de nascimento da pessoa" class="form-control">
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="example-email" class="col-md-12">CPF</label>
+                    <label for="cpf" class="col-md-12">CPF</label>
                     <div class="col-md-12">
-                        <input name="CPF" required="" id="CPF" type="text" placeholder="CPF" class="form-control form-control-line">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="example-email" class="col-md-12">Telefone</label>
-                    <div class="col-md-12">
-                        <input name="campotelefone" required="" id="campotelefone" type="text" placeholder="" data-mask="(99) 99999-9999" class="form-control">
+                        <input name="campocpf" id="campocpf" type="text" placeholder="CPF" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,3 +58,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#campocpf').mask("000.000.000-00", { placeholder: "___.___.___-__" });
+</script>
