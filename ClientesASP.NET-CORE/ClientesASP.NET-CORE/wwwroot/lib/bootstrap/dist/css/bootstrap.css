@@ -12,6 +12,12 @@ html {
 body {
   margin: 0;
 }
+
+.griditens:hover {
+    background-color: #808080;
+    cursor: pointer;
+}
+
 article,
 aside,
 details,

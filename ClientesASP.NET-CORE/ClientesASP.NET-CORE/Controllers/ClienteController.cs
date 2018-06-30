@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Clientes.Models;
 
 namespace Clientes.Controllers
 {
     public class ClienteController : Controller
     {
+
+
         public IActionResult Menu()
         {
-            return View();
+            var pessoas = new List<Pessoa>
+            {
+                new Pessoa(1,"Michel", "096.125156165", DateTime.Now, DateTime.Now)
+            };
+            return View(pessoas);
         }
 
         public IActionResult Cadastrar()

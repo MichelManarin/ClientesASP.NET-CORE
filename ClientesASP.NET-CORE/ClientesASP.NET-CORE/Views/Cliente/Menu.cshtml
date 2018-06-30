@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+
+
 <div class="body-content">
     <div class="jumbotron">
         <h1 class="text-center">Cadastro de pessoas</h1>
@@ -12,31 +14,34 @@
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
+                <th scope="col">Data de cadastro</th>
                 <th scope="col">Data de nascimento</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Michel</td>
-                <td>000000000</td>
-                <td>10/08/1996</td>
+            @foreach (var item in Model)
+            {
+            <tr class="griditens">
+                <th scope="row">@(item.Id)</th>
+                <td>@(item.Nome)</td>
+                <td>@(item.Cpf)</td>
+                <td>@(item.DataCadastro)</td>
+                <td>@(item.DataNasc)</td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>asasasa</td>
-                <td>000000000</td>
-                <td>10/08/1996</td>
-            </tr>
+            }
         </tbody>
     </table>
 
     <div class="row">
         <div class="col-lg-12">
             <span class="input-group-btn">
-                @Html.ActionLink("Nova pessoa", "cadastrar", "cliente",null, new { @class = "btn btn-primary" })
+                <a class="btn btn-primary" asp-action="Cadastrar">Nova pessoa</a>
             </span>
         </div>
 
     </div> <!-- fim row -->
 </div>
+
+<style>
+    tr
+</style>
