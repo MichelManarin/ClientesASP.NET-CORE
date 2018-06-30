@@ -31,7 +31,11 @@ namespace Pessoas
         {
             // Add framework services.
             services.AddMvc();
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CadastroPessoas;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            string connectionString = 
+                Configuration.GetSection("ConnectionStrings")
+                    .GetValue<String>("Default");
+
             services.AddDbContext<Contexto>(options => options.UseSqlServer(connectionString));
         }
 

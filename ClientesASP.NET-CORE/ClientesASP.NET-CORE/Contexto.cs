@@ -9,7 +9,7 @@ namespace Clientes
 {
     public class Contexto : DbContext
     {
-        public DbSet<Pessoa> Produtos { get; set; }
+        public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
 
         public Contexto(DbContextOptions<Contexto> options)
