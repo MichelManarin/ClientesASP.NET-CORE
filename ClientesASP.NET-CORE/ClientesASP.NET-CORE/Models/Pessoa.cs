@@ -19,9 +19,8 @@ namespace Clientes.Models
         [Required]
         public DateTime DataNasc { get; private set; }
 
-        public Pessoa(int id, string nome, string cpf, DateTime dataCadastro, DateTime dataNasc)
+        public Pessoa(string nome, string cpf, DateTime dataCadastro, DateTime dataNasc)
         {
-            this.Id = id;
             this.Nome = nome;
             this.Cpf = cpf;
             this.DataCadastro = dataCadastro;

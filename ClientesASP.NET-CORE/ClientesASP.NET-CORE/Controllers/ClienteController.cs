@@ -15,7 +15,7 @@ namespace Clientes.Controllers
         {
             var pessoas = new List<Pessoa>
             {
-                new Pessoa(1,"Michel", "096.125156165", DateTime.Now, DateTime.Now)
+                new Pessoa("Michel", "096.125156165", DateTime.Now, DateTime.Now)
             };
             return View(pessoas);
         }

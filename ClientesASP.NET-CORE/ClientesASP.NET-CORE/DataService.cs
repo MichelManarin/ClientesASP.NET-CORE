@@ -6,7 +6,7 @@ using Clientes.Models;
 
 namespace Clientes
 {
-    public class DataService
+    public class DataService : IDataService
     {
         private readonly Contexto _contexto;
 
@@ -23,8 +23,9 @@ namespace Clientes
             {
                 List<Pessoa> pessoas = new List<Pessoa>
                 {
-                  new Pessoa(1, "Michel Manarin", "097.564.825-23",DateTime.Now, new DateTime(1996, 8, 10, 0, 0, 0)),
-                  new Pessoa(1, "Alessandra", "097.564.825-23",DateTime.Now, new DateTime(1995, 8, 10, 0, 0, 0))
+                  new Pessoa("Michel Manarin", "097.564.825-23",DateTime.Now, new DateTime(1996, 8, 10, 0, 0, 0)),
+                  new Pessoa("Alessandra", "097.564.825-25",DateTime.Now, new DateTime(1995, 8, 10, 0, 0, 0)),
+                  new Pessoa("Melgs", "097.564.825-27",DateTime.Now, new DateTime(2017, 1, 1, 0, 0, 0))
                 };
 
                 pessoas.ForEach( pessoa => this._contexto.Pessoas.Add(pessoa));
