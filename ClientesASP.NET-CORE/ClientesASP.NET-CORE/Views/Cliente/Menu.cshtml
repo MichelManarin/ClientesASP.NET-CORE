@@ -5,8 +5,28 @@
 
 <div class="body-content">
     <div class="jumbotron">
-        <h1 class="text-center">Cadastro de pessoas</h1>
+        <h1 class="text-center">Pesquisa de pessoas</h1>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Menu" method="post">
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group" style="width:100%">
+                            <input style="margin:5px;" class="form-control" name="filtroNome" id="filtroNome" placeholder="filtrar pelo nome da pessoa" runat="server">
+                            <input style="margin:5px; width: 165px;" class="form-control" name="filtroNasc" id="filtroNasc" type="date" placeholder="filtrar data nascimento" runat="server">
+                            <input style="margin:5px; width: 165px;" class="form-control" name="filtroDataCad" id="filtroDataCad" type="date" placeholder="filtrar data de cadastro" runat="server">
+                            <button style="margin:5px;" class="btn btn-primary" type="submit">Filtrar</button
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div> <!-- fim col-md-12 -->
+    </div> <!-- fim row -->
+
 
     <table class="table table-dark">
         <thead>
@@ -21,13 +41,13 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr class="griditens">
-                <th scope="row">@(item.Id)</th>
-                <td>@(item.Nome)</td>
-                <td>@(item.Cpf)</td>
-                <td>@(item.DataCadastro)</td>
-                <td>@(item.DataNasc)</td>
-            </tr>
+                <tr class="griditens">
+                    <th scope="row">@(item.Id)</th>
+                    <td>@(item.Nome)</td>
+                    <td>@(item.Cpf)</td>
+                    <td>@(item.DataCadastro)</td>
+                    <td>@(item.DataNasc)</td>
+                </tr>
             }
         </tbody>
     </table>

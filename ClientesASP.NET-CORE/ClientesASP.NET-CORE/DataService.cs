@@ -16,9 +16,15 @@ namespace Clientes
         }
         
 
-        public List<Pessoa> GetPessoas()
+        public List<Pessoa> GetPessoas(string filtroNome, DateTime filtroNasc, DateTime filtroDataCad)
         {
-            return this._contexto.Pessoas.ToList();
+            DateTime _datavalida = new DateTime(1900, 1, 1, 1, 1, 1);
+
+            return this._contexto.Pessoas.Where(x => (
+                                                      (x.Nome.Contains(filtroNome) || String.IsNullOrEmpty(filtroNome)) &&
+                                                      (x.DataCadastro.Date == filtroDataCad || filtroDataCad < _datavalida) &&
+                                                      (x.DataNasc.Date == filtroNasc || filtroNasc < _datavalida))
+                                                     ).OrderBy(x => x.Nome).ToList();
         }
 
         public void InicializaDB()

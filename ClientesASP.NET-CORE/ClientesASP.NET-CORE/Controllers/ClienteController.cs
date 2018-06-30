@@ -15,18 +15,23 @@ namespace Clientes.Controllers
             this._dataService = dataService;
         }
 
-        public IActionResult Menu()
+        public IActionResult Menu(String filtroNome, DateTime filtroNasc, DateTime filtroDataCad)
         {
-            List<Pessoa> pessoas = _dataService.GetPessoas();
+            List<Pessoa> pessoas = _dataService.GetPessoas(filtroNome, filtroNasc, filtroDataCad);
             return View(pessoas);
         }
-
+        
         public IActionResult Cadastrar()
         {
             return View();
         }
 
         public IActionResult Relatorio()
+        {
+            return View();
+        }
+
+        public IActionResult CadastrarNovaPessoa()
         {
             return View();
         }
