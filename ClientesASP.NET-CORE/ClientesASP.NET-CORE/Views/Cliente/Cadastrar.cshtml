@@ -16,9 +16,8 @@
             <form asp-action="EfetuarCadastroPessoa" method="post">
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="form-group">
-                        <label class="col-md-12">Código</label>
                         <div class="col-md-12">
-                            <input type="number" disabled name="campoid" value="@(Model.campoid)" id="campoid"  placeholder="Código da pessoa" class="form-control">
+                            <input name="campoid" type="hidden" value="@(Model.campoid)" id="campoid" placeholder="Código da pessoa" class="form-control">
                         </div>
 
                         <label class="col-md-12">Nome</label>
@@ -39,8 +38,6 @@
                         <div class="col-md-12">
                             <input name="camporg" id="camporg" value="@(Model.camporg)" type="text" placeholder="RG" class="form-control">
                         </div>
-
-
                     </div>
 
                     <div class="form-group">
@@ -50,35 +47,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-xs-12">
-                    <div id="alerta-tel" hidden class="alert alert-warning" role="alert"></div>
-                    <div class="input-group">
-                        <span style="padding-bottom:5px;" class="input-group-btn">
-                            <a id="inserirtelefone" class="btn btn-primary">Inserir telefone</a>
-                        </span>
-                        <input name="campotel" id="campotel" type="text" placeholder="Telefone" class="form-control">
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <div id="alerta-tel" hidden class="alert alert-warning" role="alert"></div>
+                        <div class="input-group">
+                            <span style="padding-bottom:5px;" class="input-group-btn">
+                                <a id="inserirtelefone" class="btn btn-primary">Inserir telefone</a>
+                            </span>
+                            <input name="campotel" id="campotel" type="text" placeholder="Telefone" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <table name="telefones" id="telefones" class="table table-dark">
+                                <thead>
+                                    <tr><th scope="col">Telefones</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.telefones != null)
+                                    {
+                                        foreach (var item in Model.telefones)
+                                        {
+                                            <tr><th name="telefones" scope="row">@(item.telefone)</th></tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-
-                    <table name="telefones" id="telefones" class="table table-dark">
-                        <thead>
-                            <tr><th scope="col">Telefones</th></tr>
-                        </thead>
-                        <tbody>
-                            @if (Model.telefones != null)
-                            {
-                                foreach (var item in Model.telefones)
-                                {
-                                    <tr><th id="telefones" name="telefones" scope="row">@(item.telefone)</th></tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                </form>
-           </div>
-         </div>
+            </form>
+        </div>
     </div>
+</div>
 
     <script>
         $('#campocpf').mask("000.000.000-00", { placeholder: "___.___.___-__" });
@@ -89,7 +87,7 @@
         $(function () {
 
             $("#inserirpessoa").on("click", function (e) {
-
+                console.log($("#campoid"));
                 let cpf = $("#campocpf").val();
                 let nome = $("#camponome").val();
                 let rg = $("#camporg").val();
@@ -121,8 +119,7 @@
                 }
 
                 let idx = $("#telefones > tbody > tr").length;
-                $("#telefones > tbody").append("<tr><td><input type='hidden' name='Telefones[" + idx + "].Numero' value='" + tel + "' />" + tel
-                    + "</td><td><input type='hidden' name='Telefones[" + idx + "</td></tr>");
+                $("#telefones > tbody").append("<tr><td>" + tel + "</td></tr>");
                 $("campotel").text = "";
             });
         });

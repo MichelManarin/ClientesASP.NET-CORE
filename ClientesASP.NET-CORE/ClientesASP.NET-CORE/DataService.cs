@@ -111,9 +111,9 @@ namespace Clientes
         void IDataService.UpdatePessoa(Int32 id, PessoaTelefoneMestreDetalhe valores)
         {
             var _pessoa = this.GetPessoa(id);
-            this._contexto.Pessoas.Attach(_pessoa);
-            this._contexto.Entry(_pessoa).State = EntityState.Modified;
-            _pessoa.Altera(valores.camponome, valores.campocpf, valores.campodatacadastro, valores.camponasc,valores.camporg);
+            this._contexto.Entry(_pessoa).State = EntityState.Detached;
+            _pessoa.Altera(valores.camponome, valores.campocpf, valores.campodatacadastro, valores.camponasc, valores.camporg);
+            this._contexto.Update(_pessoa);
             this._contexto.SaveChanges();
         }
 

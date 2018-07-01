@@ -68,7 +68,6 @@ namespace Clientes.Controllers
         public IActionResult EfetuarCadastroPessoa(PessoaTelefoneMestreDetalhe valores)
         {
             //DateTime _datanasc = DateTime.ParseExact(valores.camponasc,"yyyy-MM-dd", CultureInfo.InvariantCulture);
-
             if (valores.campoid == 0)
             {
                 _dataService.SetPessoas(new Pessoa(valores.camponome, valores.campocpf, DateTime.Now, valores.camponasc,valores.camporg));
@@ -79,7 +78,7 @@ namespace Clientes.Controllers
                 }
             } else
             {
-               // _dataService.UpdatePessoa(valores.campoid, valores);
+               _dataService.UpdatePessoa(valores.campoid, valores);
             }
             
             return RedirectToAction("Menu");
