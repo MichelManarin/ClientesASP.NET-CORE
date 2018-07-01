@@ -56,7 +56,7 @@ namespace Clientes.Controllers
                 _viewmodel.camporg = _pessoa.Rg;
 
                 _dataService.GetTelefonesByPessoa(_pessoa).ForEach(
-                    x => _viewmodel.telefones.Add( new PessoaTelefoneMestreDetalhe.TelefoneInformado(x.Numero))
+                    x => _viewmodel.telefones.Add((x.Numero))
                 );
             }
             
@@ -74,7 +74,7 @@ namespace Clientes.Controllers
 
                 foreach (var item in valores.telefones)
                 {
-                    _dataService.SetTelefones(new Telefone(_dataService.GetPessoaByCpf(valores.campocpf), item.telefone));
+                    _dataService.SetTelefones(new Telefone(_dataService.GetPessoaByCpf(valores.campocpf), item));
                 }
             } else
             {

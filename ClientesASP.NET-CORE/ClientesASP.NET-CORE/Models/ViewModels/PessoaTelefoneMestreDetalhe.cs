@@ -13,11 +13,11 @@ namespace Clientes.Models.ViewModels
         public DateTime campodatacadastro { get; set; }
         public string campocpf { get; set; }
         public string camporg { get; set; }
-        public List<TelefoneInformado> telefones { get; set; }
+        public List<String> telefones { get; set; }
 
         public PessoaTelefoneMestreDetalhe()
         {
-            this.telefones = new List<TelefoneInformado> { };
+            this.telefones = new List<String>{};
         }
 
         public class TelefoneInformado

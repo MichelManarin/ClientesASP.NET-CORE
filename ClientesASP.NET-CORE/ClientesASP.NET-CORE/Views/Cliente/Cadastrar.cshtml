@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="form-group">
-                            <table name="telefones" id="telefones" class="table table-dark">
+                            <table id="telefones" class="table">
                                 <thead>
                                     <tr><th scope="col">Telefones</th></tr>
                                 </thead>
@@ -66,7 +66,7 @@
                                     {
                                         foreach (var item in Model.telefones)
                                         {
-                                            <tr><th name="telefones" scope="row">@(item.telefone)</th></tr>
+                                            <tr><th name="telefones" scope="row">@(item)</th></tr>
                                         }
                                     }
                                 </tbody>
@@ -119,7 +119,7 @@
                 }
 
                 let idx = $("#telefones > tbody > tr").length;
-                $("#telefones > tbody").append("<tr><td>" + tel + "</td></tr>");
+                $("#telefones > tbody").append("<tr> <td> <input name='telefones' type='hidden' value='"+tel+"'/>" + tel+ "</td><td>");
                 $("campotel").text = "";
             });
         });

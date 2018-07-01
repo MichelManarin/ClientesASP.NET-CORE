@@ -23,8 +23,9 @@ namespace Clientes.Models
 
         private void Validate()
         {
-            if (ParametroDaAplicacao.EstadoDeOperacao == "SC" && this.Rg.Length == 0)
-               throw new Exception("É necessário cadastrar o RG");
+            if (ParametroDaAplicacao.EstadoDeOperacao == "SC" && this.Rg != null)
+                if (this.Rg.Length == 0)
+                    throw new Exception("É necessário cadastrar o RG");
 
             if(ParametroDaAplicacao.EstadoDeOperacao == "PR")
             {
