@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 
 namespace Clientes.Models
 {
-    public class Telefone
+    public class Parametro
     {
         [Required]
         public int Id { get; private set; }
-        [Required]
-        public string Numero { get; private set; }
-        [Required]
-        public Pessoa Pessoa { get; private set; }
 
-        public Telefone()
+        [Required]
+        public string Estado { get; private set; }
+
+        public void SetarEstado(string estado)
         {
-
+            this.Estado = estado;
         }
 
-        public Telefone(Pessoa pessoa, string numero)
+        public Parametro(string estado)
         {
-            this.Pessoa = pessoa;
-            this.Numero = numero;
+            this.Estado = estado;
         }
     }
+    
 }

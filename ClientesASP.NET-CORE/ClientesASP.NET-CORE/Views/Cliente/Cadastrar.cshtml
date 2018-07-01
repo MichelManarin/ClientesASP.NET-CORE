@@ -4,61 +4,126 @@
 
 
 <script src="~/lib/jquery/dist/jquery.mask.min.js"></script>
+
 <div class="body-content">
+
     <div class="jumbotron">
         <h1 class="text-center">Cadastro de pessoas</h1>
     </div>
+
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-xs-12">
-            <form>
-                <div class="form-group">
-                    <label class="col-md-12">Nome</label>
-                    <div class="col-md-12">
-                        <input required name="camponome" id="camponome" type="text" placeholder="Nome da pessoa" class="form-control">
-                    </div>
-                    <label for="datanascimento" class="col-md-12">Data de nascimento</label>
-                    <div class="col-md-12">
-                        <input name="camponasc" id="camponasc" type="date" placeholder="Data de nascimento da pessoa" class="form-control">
-                    </div>
-                    <label for="cpf" class="col-md-12">CPF</label>
-                    <div class="col-md-12">
-                        <input name="campocpf" id="campocpf" type="text" placeholder="CPF" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-success">Salvar</button>
-                        <button novalidate class="btn btn-primary" href="/cliente/menu">Cancelar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-lg-4 col-md-6 col-xs-12">
-            <form id="formulario" onsubmit="pessoaController.adiciona(event)" class="form-horizontal form-material">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <input name="Telefone" required="" id="CPF" type="text" placeholder="Telefone" class="form-control form-control-line">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <button type="submit" class="btn btn-primary">Inserir telefone</button>
-                    </div>
-                </div>
-            </form>
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <form asp-action="EfetuarCadastroPessoa" method="post">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="form-group">
+                        <label class="col-md-12">Código</label>
+                        <div class="col-md-12">
+                            <input type="number" disabled name="campoid" value="@(Model.campoid)" id="campoid"  placeholder="Código da pessoa" class="form-control">
+                        </div>
 
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Telefone</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+                        <label class="col-md-12">Nome</label>
+                        <div class="col-md-12">
+                            <input required name="camponome" value="@(Model.camponome)" id="camponome" type="text" placeholder="Nome da pessoa" class="form-control">
+                        </div>
+
+                        <label for="datanascimento" class="col-md-12">Data de nascimento</label>
+                        <div class="col-md-12">
+                            <input name="camponasc" id="camponasc" value="@(Model.camponasc)" type="date" placeholder="Data de nascimento da pessoa" class="form-control">
+                        </div>
+
+                        <label for="cpf" class="col-md-12">CPF</label>
+                        <div class="col-md-12">
+                            <input name="campocpf" id="campocpf" value="@(Model.campocpf)" type="text" placeholder="CPF" class="form-control">
+                        </div>
+                        <label for="RG" class="col-md-12">RG</label>
+                        <div class="col-md-12">
+                            <input name="camporg" id="camporg" value="@(Model.camporg)" type="text" placeholder="RG" class="form-control">
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button type="submit" id="inserirpessoa" runat="server" class="btn btn-success">Salvar</button>
+                            <button novalidate class="btn btn-primary" href="/cliente/menu">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div id="alerta-tel" hidden class="alert alert-warning" role="alert"></div>
+                    <div class="input-group">
+                        <span style="padding-bottom:5px;" class="input-group-btn">
+                            <a id="inserirtelefone" class="btn btn-primary">Inserir telefone</a>
+                        </span>
+                        <input name="campotel" id="campotel" type="text" placeholder="Telefone" class="form-control">
+                    </div>
+
+
+                    <table name="telefones" id="telefones" class="table table-dark">
+                        <thead>
+                            <tr><th scope="col">Telefones</th></tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.telefones != null)
+                            {
+                                foreach (var item in Model.telefones)
+                                {
+                                    <tr><th id="telefones" name="telefones" scope="row">@(item.telefone)</th></tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                </form>
+           </div>
+         </div>
     </div>
-</div>
 
-<script>
-    $('#campocpf').mask("000.000.000-00", { placeholder: "___.___.___-__" });
-</script>
+    <script>
+        $('#campocpf').mask("000.000.000-00", { placeholder: "___.___.___-__" });
+        $('#camporg').mask("00.000.000-0", { placeholder: "__.___.___-_" });
+        $('#campotel').mask("(00)000000000", { placeholder: "(__)__________" });
+        $("input").css("margin-bottom", "5px");
+
+        $(function () {
+
+            $("#inserirpessoa").on("click", function (e) {
+
+                let cpf = $("#campocpf").val();
+                let nome = $("#camponome").val();
+                let rg = $("#camporg").val();
+
+                if (nome.length < 3) {
+                    $("#alerta-tel").text("O campo nome deve conter no mínimo 3 letras");
+                    $('#alerta-tel').attr('hidden', false);
+                    return false;
+                }
+                if (cpf.length != 14) {
+                    $("#alerta-tel").text("O campo cpf deve conter 14 números");
+                    $('#alerta-tel').attr('hidden', false);
+                    return false;
+                }
+
+            });
+
+            $("#inserirtelefone").on("click", function (e) {
+                e.preventDefault();
+                $('#alerta-tel').attr('hidden', true);
+                let tel = $("#campotel").val();
+              
+              
+
+                if (tel.length != 13) {
+                    $("#alerta-tel").text("O campo telefone deve conter 13 números");
+                    $('#alerta-tel').attr('hidden', false);
+                    return false;
+                }
+
+                let idx = $("#telefones > tbody > tr").length;
+                $("#telefones > tbody").append("<tr><td><input type='hidden' name='Telefones[" + idx + "].Numero' value='" + tel + "' />" + tel
+                    + "</td><td><input type='hidden' name='Telefones[" + idx + "</td></tr>");
+                $("campotel").text = "";
+            });
+        });
+    </script>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Parâmetros do sistema";
+}
+<div class="body-content">
+    <div class="jumbotron">
+        <h1 class="text-center">Parâmetros do sistema</h1>
+    </div>
+
+    <form asp-action="EfetuarCadastroParametro" method="post">
+        <div class="form-group">
+
+              
+            <label for="Estados">O sistema está configurada para o estado de @(Model.Estado)</label>
+            <br />
+            <label for="Estados">Selecione o estado</label>
+            <select name="campoestado" class="form-control" id="campoestado">
+                <option>SC</option>
+                <option>PR</option>
+            </select>
+        </div>
+            <button  type="submit" runat="server" class="btn btn-primary">Salvar parâmetro</button>
+    </form>
+</div>

@@ -11,6 +11,7 @@ namespace Clientes
     {
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Parametro> Parametro { get; set; }
 
         public Contexto(DbContextOptions<Contexto> options)
             : base(options)
