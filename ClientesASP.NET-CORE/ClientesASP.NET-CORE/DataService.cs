@@ -89,7 +89,7 @@ namespace Clientes
 
         Parametro IDataService.BuscaParametro()
         {
-            return this._contexto.Parametro.Find(1);
+            return this._contexto.Parametro.Last();
         }
 
         void IDataService.GerenciaParametro(String estado){
