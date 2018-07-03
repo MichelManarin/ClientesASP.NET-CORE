@@ -29,8 +29,8 @@ namespace Clientes
 
         public Pessoa GetPessoaByCpf(string CPF)
         {
-            if (String.IsNullOrEmpty(CPF))
-                throw new ArgumentException("É necessário primeiro cadastrar a pessoa para depois cadastrar os telefones");
+            if (String.IsNullOrWhiteSpace(CPF))
+                throw new ArgumentException("É necessário informar o CPF da pessoa.");
 
             var _pessoa = this._contexto.Pessoas.Where(x => (x.Cpf.Contains(CPF))).FirstOrDefault();
             return _pessoa;
@@ -48,7 +48,7 @@ namespace Clientes
 
         public List<Pessoa> GetPessoas(string filtroNome, DateTime filtroNasc, DateTime filtroDataCad)
         {
-            DateTime _datavalida = new DateTime(1900, 1, 1, 1, 1, 1);
+            DateTime _datavalida = new DateTime(0002, 1, 1);
 
             return this._contexto.Pessoas.Where(x => (
                                                       (x.Nome.Contains(filtroNome) || String.IsNullOrEmpty(filtroNome)) &&
@@ -56,7 +56,7 @@ namespace Clientes
                                                       (x.DataNasc.Date == filtroNasc || filtroNasc < _datavalida))
                                                      ).OrderBy(x => x.Nome).ToList();
         }
-
+        
         public void InicializaDB()
         {
             this._contexto.Database.EnsureCreated();
@@ -65,15 +65,18 @@ namespace Clientes
             {
                 this._contexto.Parametro.Add(new Parametro("SC"));
                 this._contexto.SaveChanges();
-            } 
+                ParametroDaAplicacao.EstadoDeOperacao = "SC";
+            } else {
+                ParametroDaAplicacao.EstadoDeOperacao = this._contexto.Parametro.Last().Estado;
+            }
 
             if (this._contexto.Pessoas.Count() == 0)
             {
                 List<Pessoa> pessoas = new List<Pessoa>
                 {
-                  new Pessoa("Michel Manarin", "097.564.825-23",DateTime.Now, new DateTime(1996, 8, 10, 0, 0, 0),"33.934.566-4"),
-                  new Pessoa("Alessandra", "097.564.825-25",DateTime.Now, new DateTime(1995, 8, 10, 0, 0, 0) , "33.934.566-4"),
-                  new Pessoa("Melgs", "097.564.825-27",DateTime.Now, new DateTime(2017, 1, 1, 0, 0, 0),"33.934.566-4")
+                  new Pessoa("Michel Manarin", "097.564.825-23",DateTime.Now, new DateTime(1996, 8, 10),"33.934.566-4"),
+                  new Pessoa("Alessandra", "097.564.825-25",DateTime.Now, new DateTime(1995, 8, 10) , "33.934.566-4"),
+                  new Pessoa("Melgs", "097.564.825-27",DateTime.Now, new DateTime(1996, 1, 1),"33.934.566-4")
                 };
 
                 pessoas.ForEach(pessoa => this._contexto.Pessoas.Add(pessoa));
@@ -94,17 +97,19 @@ namespace Clientes
 
         void IDataService.GerenciaParametro(String estado){
 
-            var _parametro = this._contexto.Parametro.Find(1);
+            var _parametro = this._contexto.Parametro.Last();
             if (_parametro is null)
             {
                 this._contexto.Parametro.Add(new Parametro(estado));
                 this._contexto.SaveChanges();
+                ParametroDaAplicacao.EstadoDeOperacao = estado;
             } else
             {
                 this._contexto.Entry(_parametro).State = EntityState.Detached;
                 _parametro.SetarEstado(estado);
                 this._contexto.Update(_parametro);
                 this._contexto.SaveChanges();
+                ParametroDaAplicacao.EstadoDeOperacao = estado;
             }
         }
 

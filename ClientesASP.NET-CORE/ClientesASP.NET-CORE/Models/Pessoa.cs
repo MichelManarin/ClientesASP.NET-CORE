@@ -23,14 +23,13 @@ namespace Clientes.Models
 
         private void Validate()
         {
-            if (ParametroDaAplicacao.EstadoDeOperacao == "SC" && this.Rg != null)
-                if (this.Rg.Length == 0)
+            if (ParametroDaAplicacao.EstadoDeOperacao == "SC")
+                if (String.IsNullOrWhiteSpace(this.Rg))
                     throw new Exception("É necessário cadastrar o RG");
 
             if(ParametroDaAplicacao.EstadoDeOperacao == "PR")
             {
-                TimeSpan _dif = Convert.ToDateTime(DateTime.Now) - Convert.ToDateTime(this.DataNasc);
-                if (_dif.Days < (18 * 365))
+                if (this.DataNasc.AddYears(18) > DateTime.Now.Date)
                     throw new Exception("É necessário ter mais de 18 anos para cadastro");
             }
 

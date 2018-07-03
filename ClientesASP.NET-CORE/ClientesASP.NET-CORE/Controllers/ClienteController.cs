@@ -22,7 +22,6 @@ namespace Clientes.Controllers
 
         public IActionResult Menu(String filtroNome, DateTime filtroNasc, DateTime filtroDataCad)
         {
-            ParametroDaAplicacao.EstadoDeOperacao = this._dataService.BuscaParametro().Estado;
             List<Pessoa> pessoas = _dataService.GetPessoas(filtroNome, filtroNasc, filtroDataCad);
             return View(pessoas);
         }
@@ -30,14 +29,12 @@ namespace Clientes.Controllers
         public IActionResult Parametro()
         {
             var _estadoOperacao = _dataService.BuscaParametro();
-            ParametroDaAplicacao.EstadoDeOperacao = _estadoOperacao.Estado;
             return View(_estadoOperacao);
         }
 
         public IActionResult EfetuarCadastroParametro(string campoestado)
         {
             this._dataService.GerenciaParametro(campoestado);
-            ParametroDaAplicacao.EstadoDeOperacao = campoestado;
             return RedirectToAction("Menu");
         }
 

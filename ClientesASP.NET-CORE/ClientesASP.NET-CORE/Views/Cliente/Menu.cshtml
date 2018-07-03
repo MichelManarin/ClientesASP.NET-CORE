@@ -18,7 +18,7 @@
                             <input style="margin:5px;" class="form-control" name="filtroNome" id="filtroNome" placeholder="filtrar pelo nome da pessoa" runat="server">
                             <input style="margin:5px; width: 165px;" class="form-control" name="filtroNasc" id="filtroNasc" type="date" placeholder="filtrar data nascimento" runat="server">
                             <input style="margin:5px; width: 165px;" class="form-control" name="filtroDataCad" id="filtroDataCad" type="date" placeholder="filtrar data de cadastro" runat="server">
-                            <button style="margin:5px;" class="btn btn-primary" type="submit">Filtrar</button>
+                            <button id="btnFiltrar" style="margin:5px;" class="btn btn-primary" type="submit">Filtrar</button>
                         </div>
                     </div>
                     
@@ -64,3 +64,35 @@
     </div> <!-- fim row -->
 </div>
 
+<script>
+
+    $(function () {
+
+
+        $(window).bind("beforeunload", function () {
+            let caminho = document.activeElement.href;
+            if (caminho.includes("/Cliente/")) {
+                sessionStorage.removeItem("pessoasFiltroNome");
+                sessionStorage.removeItem("pessoasFiltroNasc");
+                sessionStorage.removeItem("pessoasFiltroDataCad");
+            };
+        })
+
+        $("#btnFiltrar").on("click", function (e) {
+            sessionStorage.setItem("pessoasFiltroNome", $("#filtroNome").val());
+            sessionStorage.setItem("pessoasFiltroNasc", $("#filtroNasc").val());
+            sessionStorage.setItem("pessoasFiltroDataCad", $("#filtroDataCad").val());
+        });
+
+        $(document).ready(function () {
+            let nome = sessionStorage.getItem("pessoasFiltroNome");
+            let nasc = sessionStorage.getItem("pessoasFiltroNasc");
+            let datacad = sessionStorage.getItem("pessoasFiltroDataCad");
+
+            $("#filtroNome").val(nome);
+            $("#filtroNasc").val(nasc);
+            $("#filtroDataCad").val(datacad);
+        });
+    });
+    
+</script>

@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-lg-12 col-md-12 col-xs-12">
-            <form asp-action="EfetuarCadastroPessoa" method="post">
+            <form novalidate asp-action="EfetuarCadastroPessoa" method="post">
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="form-group">
                         <div class="col-md-12">
@@ -41,9 +41,9 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" style="padding-top:5px">
                             <button type="submit" id="inserirpessoa" runat="server" class="btn btn-success">Salvar</button>
-                            <button novalidate class="btn btn-primary" href="/cliente/menu">Cancelar</button>
+                            <button type="submit" id="btnCancelar" novalidate class="btn btn-primary" asp-action="Menu">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -86,8 +86,11 @@
 
         $(function () {
 
+            $("#btnCancelar").on("click", function (e) {
+                e.preventDefault();
+            });
+
             $("#inserirpessoa").on("click", function (e) {
-                console.log($("#campoid"));
                 let cpf = $("#campocpf").val();
                 let nome = $("#camponome").val();
                 let rg = $("#camporg").val();

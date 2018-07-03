@@ -70,6 +70,7 @@ namespace Pessoas
                 .GetService<IDataService>();
 
             dataService.InicializaDB();
+
         }
     }
 }
